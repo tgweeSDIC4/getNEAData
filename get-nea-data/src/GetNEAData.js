@@ -1,90 +1,76 @@
-import './GetNEAData.css';
 import axios from 'axios';
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 const API = axios.create({
   baseURL: "https://api.data.gov.sg/v1/environment",
 });
 
-const twentyfourhrData="/24-hour-weather-forecast";
-const psiData="/psi";
-const uvIndex="/uv-index";
-const twohrData="/2-hour-weather-forecast";
-const fourdayData="/4-day-weather-forecast";
-
-
-function GetNEAData() {
-
-  const [neaData,setNeaData]=useState([]);
- 
+function GetNEAData(props) {
 
   useEffect(()=>{
-    findNEAData();
+    let dataType="";
+    
+    switch(props.dataType.toUpperCase()){
+      case "PSI": dataType="/psi";
+        break;
+      case "UVINDEX": dataType="/uv-index";
+        break;
+      case "2HOUR": dataType="/2-hour-weather-forecast";
+        break;
+      case "24HOUR": dataType="/24-hour-weather-forecast";
+        break;
+      case "4DAY": dataType="/4-day-weather-forecast";
+        break;
+      default: dataType="/2-hour-weather-forecast";
+    }
+    
+    findNEAData(dataType);
      return;
   },[])
 
-  async function findNEAData() {
+  async function findNEAData(dataType) {
     let nowTime = new Date().toISOString().slice(0, -5);
-    const response = await API.get(fourdayData,{
+    const response = await API.get(dataType,{
       params: {
         date: [nowTime],
       }
   })
   
     if (response.status===200){
-      // let data={defaultState}
-
-      //psi 
-      // console.log(response.data.items[0]);
-
-      // console.log(response.data.items[0].readings);
-      // console.log(response.data.items[0].readings.psi_twenty_four_hourly);
-      // console.log(response.data.items[0].readings.psi_twenty_four_hourly.national);
-      // console.log(response.data.items[0].readings.pm25_twenty_four_hourly.national);
-
-      //UV index
-      // console.log(response.data.items[0]);
-      // console.log(response.data.items[0].index[0]);
-      // console.log(response.data.items[0].index[0].value);
-
-      //2 hour weather
-      //  console.log(response.data.items[0]);
-
-      // console.log(response.data.items[0]);
-      // console.log(response.data.items[0].forecasts);
-
-      // 4 day weather
-      // console.log("4 Days:",response.data.items[0]);
-
-      // console.log(response.data.items[0].forecasts[0].forecast);
-      // console.log(response.data.items[0].forecasts[0].temperature);
-      // console.log(response.data.items[0].forecasts[0].relative_humidity);
-      // console.log(response.data.items[0].forecasts[0].wind);
-      
-      // 24 hours weather
-      // console.log("24 Hours:",response.data.items[0]);
-     
-      
-        // data.forecast=response.data.items[0].general.forecast;
-        // data.relative_humidity=response.data.items[0].general.relative_humidity;
-        // data.temperature=response.data.items[0].general.temperature
-
-  
       let data={...response.data.items[0]};
-      console.log(data)
-      // setNeaData(data)
-    
-        
+      props.getData(data);
+      
     }
+    
   }
-
-  return (
-    <div className="App">
-      <u>NEA Data Retrieval component</u>
-      <br/><br/>
-   
-    </div>
-  );
 }
 
 export default GetNEAData;
+
+//Reference
+
+  //Pass in dataType="xxx" 
+  //Sample code:  <GetNEAData dataType="2hour" getData={getData}/> 
+
+  // PSI dataType="psi"
+      // data.readings
+      // data.readings.psi_twenty_four_hourly.national
+      // data.readings.pm25_twenty_four_hourly.national
+
+  // UV index dataType="uvindex"
+      // data.value
+
+  // 2 hour weather dataType="2hour"
+      // data.forecasts
+
+  // 24 hours weather dataType="24hour"
+      // data.general.forecast
+      // data.general.relative_humidity
+      // data.general.temperature
+
+  // 4 day weather dataType="4day"
+      // data.forecasts[x].forecast)
+      // data.forecasts[x].temperature)
+      // data.forecasts[x].relative_humidity)
+      // data.forecasts[x].wind)
+      // where x is a integer between 0 to 3

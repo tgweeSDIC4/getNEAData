@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import GetNEAData from './GetNEAData';
+import ShowData from './ShowData';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <GetNEAData />
+    <ShowData />
   </React.StrictMode>,
+  
   document.getElementById('root')
 );
 
