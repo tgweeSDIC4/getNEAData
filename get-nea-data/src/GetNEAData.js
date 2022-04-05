@@ -9,7 +9,7 @@ function GetNEAData(props) {
 
   useEffect(()=>{
     let dataType="";
-    
+   
     switch(props.dataType.toUpperCase()){
       case "PSI": dataType="/psi";
         break;
@@ -25,7 +25,8 @@ function GetNEAData(props) {
     }
     
     findNEAData(dataType);
-     return;
+
+    return;
   },[])
 
   async function findNEAData(dataType) {
@@ -39,9 +40,8 @@ function GetNEAData(props) {
     if (response.status===200){
       let data={...response.data.items[0]};
       props.getData(data);
-      
+ 
     }
-    
   }
 }
 

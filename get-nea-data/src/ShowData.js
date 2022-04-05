@@ -1,16 +1,18 @@
 import "./ShowData.css";
 import GetNEAData from "./GetNEAData"
 import DisplayData from "./DisplayData"
-import {useState} from "react";
+import {UseEffect, useState} from "react";
 
 
 function ShowData (){
+    
     const [psiData, setPsiData]=useState({});
     const [uvData, setUVData]=useState({});
     const [twohourData, settwohourData]=useState({});
-    const [twentyfourData, settwentyfourData]=useState({});
+    const [twentyfourhourData, settwentyfourhourData]=useState({});
     const [fourdayData, setfourdayData]=useState({});
 
+   
  
     function getPsiData(data) {
         setPsiData(data);
@@ -24,8 +26,8 @@ function ShowData (){
         settwohourData(data);
     }
 
-    function gettwentyfourData(data) {
-        settwentyfourData(data);
+    function gettwentyfourhourData(data) {
+        settwentyfourhourData(data);
     }
 
     function getfourdayData(data) {
@@ -34,21 +36,21 @@ function ShowData (){
 
 
 
-    
     return(
         <div className="App">
-            <u>Show Data Screen</u>
+            <u>Parent Screen</u>
             <br/><br/>
 
             <GetNEAData dataType="psi" getData={getPsiData}/>
             <GetNEAData dataType="uvindex" getData={getUVData}/>
             <GetNEAData dataType="2hour" getData={gettwohourData}/>
-            <GetNEAData dataType="24hour" getData={gettwentyfourData}/>
+            <GetNEAData dataType="24hour" getData={gettwentyfourhourData}/>
             <GetNEAData dataType="4day" getData={getfourdayData}/>
             {/* <DisplayData psiData={psiData}/> */}
             {/* <DisplayData uvData={uvData}/> */}
             {/* <DisplayData twohourData={twohourData}/> */}
-            <DisplayData twentyfourData={twentyfourData}/>
+            <DisplayData twentyfourhourData={twentyfourhourData}/>
+            {/* {console.log(twentyfourData)} */}
             {/* <DisplayData fourdayData={fourdayData}/>  */}
         
         </div>

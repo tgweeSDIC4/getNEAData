@@ -1,10 +1,13 @@
+import { useEffect } from "react"
+
 
 function DisplayData(props){
 
+    console.log("Display data: ",props)
     return(
         <div className="App">
             Display Data screen
-            {console.log(props)}
+         
             <br/><br/>
             {/* PSI: {props.psiData.readings.psi_twenty_four_hourly.national} */}
             {/* UV Index: {props.uvData.value} */}
