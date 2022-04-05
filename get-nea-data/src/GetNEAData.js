@@ -50,7 +50,12 @@ export default GetNEAData;
 //Reference
 
   //Pass in dataType="xxx" 
-  //Sample code:  <GetNEAData dataType="2hour" getData={getData}/> 
+  //Sample code:  
+  
+  //function getData(data) {
+  //  setData(data);
+  //}
+  //<GetNEAData dataType="2hour" getData={getData}/> 
 
   // PSI dataType="psi"
       // data.readings
@@ -61,7 +66,9 @@ export default GetNEAData;
       // data.value
 
   // 2 hour weather dataType="2hour"
-      // data.forecasts
+      // data.forecasts[x]
+      // data.forecasts[x].area
+      // data.forecasts[x].forecast
 
   // 24 hours weather dataType="24hour"
       // data.general.forecast
