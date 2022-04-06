@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import ShowData from './ShowData';
+import Parent from './Parent';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ShowData />
+    <Parent />
   </React.StrictMode>,
   
   document.getElementById('root')

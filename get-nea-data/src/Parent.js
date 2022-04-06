@@ -1,7 +1,7 @@
-import "./ShowData.css";
+import "./Parent.css";
 import GetNEAData from "./GetNEAData"
 import DisplayData from "./DisplayData"
-import {UseEffect, useState} from "react";
+import {useState} from "react";
 
 
 function ShowData (){
@@ -11,8 +11,6 @@ function ShowData (){
     const [twohourData, settwohourData]=useState({});
     const [twentyfourhourData, settwentyfourhourData]=useState({});
     const [fourdayData, setfourdayData]=useState({});
-
-   
  
     function getPsiData(data) {
         setPsiData(data);
@@ -34,8 +32,6 @@ function ShowData (){
         setfourdayData(data);
     }
 
-
-
     return(
         <div className="App">
             <u>Parent Screen</u>
@@ -46,12 +42,12 @@ function ShowData (){
             <GetNEAData dataType="2hour" getData={gettwohourData}/>
             <GetNEAData dataType="24hour" getData={gettwentyfourhourData}/>
             <GetNEAData dataType="4day" getData={getfourdayData}/>
-            {/* <DisplayData psiData={psiData}/> */}
-            {/* <DisplayData uvData={uvData}/> */}
-            {/* <DisplayData twohourData={twohourData}/> */}
-            <DisplayData twentyfourhourData={twentyfourhourData}/>
-            {/* {console.log(twentyfourData)} */}
-            {/* <DisplayData fourdayData={fourdayData}/>  */}
+            
+            {psiData.readings!==undefined ? <DisplayData psiData={psiData}/> : null }
+            {uvData.index!==undefined ? <DisplayData uvData={uvData}/> : null }
+            {twohourData.forecasts!==undefined ? <DisplayData twohourData={twohourData}/> : null }
+            {twentyfourhourData.general!==undefined ? <DisplayData twentyfourhourData={twentyfourhourData}/> : null }
+            {fourdayData.forecasts!==undefined ? <DisplayData fourdayData={fourdayData}/> : null }
         
         </div>
     
