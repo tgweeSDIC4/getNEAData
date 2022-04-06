@@ -38,8 +38,8 @@ function GetNEAData(props) {
   })
   
     if (response.status===200){
-      let data={...response.data.items[0]};
-      props.getData(data);
+      // let data={...response.data.items[0]};
+      props.getData({...response.data.items[0]});
  
     }
   }
